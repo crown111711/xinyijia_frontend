@@ -1,6 +1,7 @@
 <template>
   <div class="loginWrapper">
     <div class="hd">
+      <img src="../../assets/logo.png">
       <h2>新亿嘉</h2>
       <p>与世界分享你的知识、经验和见解</p>
     </div>
@@ -24,86 +25,114 @@
 </template>
 
 <script>
-import { doLogin } from '../../lib/vueHelper'
-export default {
-  name: 'login',
-  data () {
-    return {
-      loginForm: {
-        userName: '',
-        pwd: ''
-      },
-      loginRule: {
-        userName: [
-          { required: true, message: '请输入用户名', trigger: 'blur' },
-          { min: 3, max: 10, message: '长度在 3 到 16 个字符', trigger: 'blur' }
-        ],
-        pwd: [
-          { required: true, message: '请输入密码', trigger: 'blur' },
-          { min: 3, max: 20, message: '长度在 3 到 20 个字符', trigger: 'blur' }
-        ]
+  import {
+    doLogin
+  } from '../../lib/vueHelper'
+  export default {
+    name: 'login',
+    data() {
+      return {
+        loginForm: {
+          userName: '',
+          pwd: ''
+        },
+        loginRule: {
+          userName: [{
+              required: true,
+              message: '请输入用户名',
+              trigger: 'blur'
+            },
+            {
+              min: 3,
+              max: 10,
+              message: '长度在 3 到 16 个字符',
+              trigger: 'blur'
+            }
+          ],
+          pwd: [{
+              required: true,
+              message: '请输入密码',
+              trigger: 'blur'
+            },
+            {
+              min: 3,
+              max: 20,
+              message: '长度在 3 到 20 个字符',
+              trigger: 'blur'
+            }
+          ]
+        }
+      }
+    },
+    methods: {
+      submitForm(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            var data = {
+              'userName': this.loginForm.userName,
+              'password': this.loginForm.pwd
+            }
+            doLogin(this, data)
+          } else {
+            return false
+          }
+        })
       }
     }
-  },
-  methods: {
-    submitForm (formName) {
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          var data = {
-            'userName': this.loginForm.userName,
-            'password': this.loginForm.pwd
-          }
-          doLogin(this, data)
-        } else {
-          return false
-        }
-      })
-    }
   }
-}
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.loginWrapper {
+  .loginWrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
-    font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
+    font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, SimSun, sans-serif;
     font-size: 18px;
-}
-.loginWrapper .hd {
-  width: 300px;
-}
-.loginWrapper .hd h2 {
+  }
+
+  .loginWrapper .hd {
+    width: 300px;
+  }
+
+  .loginWrapper .hd h2 {
     font-weight: 400;
     color: #20A0FF;
-}
-.loginWrapper .hd p {
-  font-size: 15px;
-  color: #1f2f3d;
-}
-.loginWrapper .bd {
+  }
+
+  .loginWrapper .hd p {
+    font-size: 15px;
+    color: #1f2f3d;
+  }
+
+  .loginWrapper .bd {
     width: 300px;
-}
-.loginWrapper .bd .submitBtn {
-  width: 100%;
-}
-.loginWrapper .bd .el-form-item:last-child {
-  margin-bottom: 10px;
-}
-.loginWrapper .ft {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  width: 300px;
-}
-.loginWrapper .ft a {
-  font-size: 14px;
-  text-decoration: none;
-  color: #20A0FF;
-}
+  }
+
+  .loginWrapper .bd .submitBtn {
+    width: 100%;
+  }
+
+  .loginWrapper .bd .el-form-item:last-child {
+    margin-bottom: 10px;
+  }
+
+  .loginWrapper .ft {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 300px;
+  }
+
+  .loginWrapper .ft a {
+    font-size: 14px;
+    text-decoration: none;
+    color: #20A0FF;
+  }
+
 </style>

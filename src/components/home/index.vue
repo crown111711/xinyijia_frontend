@@ -1,113 +1,88 @@
 <template>
-  <div class="home">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li>
-        <a
-          href="https://vuejs.org"
-          target="_blank"
-        >
-          Core Docs
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://forum.vuejs.org"
-          target="_blank"
-        >
-          Forum
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://chat.vuejs.org"
-          target="_blank"
-        >
-          Community Chat
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://twitter.com/vuejs"
-          target="_blank"
-        >
-          Twitter
-        </a>
-      </li>
-      <br>
-      <li>
-        <a
-          href="http://vuejs-templates.github.io/webpack/"
-          target="_blank"
-        >
-          Docs for This Template
-        </a>
-      </li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li>
-        <a
-          href="http://router.vuejs.org/"
-          target="_blank"
-        >
-          vue-router
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vuex.vuejs.org/"
-          target="_blank"
-        >
-          vuex
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vue-loader.vuejs.org/"
-          target="_blank"
-        >
-          vue-loader
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/awesome-vue"
-          target="_blank"
-        >
-          awesome-vue
-        </a>
-      </li>
-    </ul>
+  <div class="wrapper">
+    <Topbar></Topbar>
+    <NavMenu></NavMenu>
+    <div class="bd">
+      <div class="left-bd">
+        <horse-lantern></horse-lantern>
+      </div>
+      <div class="right-bd">
+        <news-tab></news-tab>
+      </div>
+    </div>
+    <el-tooltip placement="top">
+      <div slot="content">点击查看更多</div>
+      <el-button  @click="handleSelect" >商品信息</el-button>
+    </el-tooltip>
+    <div class="product">
+      <products></products>
+    </div>
+
   </div>
 </template>
 
+
 <script>
-export default {
-  name: 'home',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
+  import Topbar from './topbar'
+  import NavMenu from './NavMenu'
+  import HorseLantern from './horseLantern'
+  import NewsTab from './newsTab'
+  import Products from './products'
+  export default {
+    components: {
+      Topbar,
+      NavMenu,
+      HorseLantern,
+      NewsTab,
+      Products
+    },
+    data() {
+      return {}
+    },
+    computed: {
+
+    },
+    methods: {
+      handleSelect(key, keyPath) {
+        console.log(key, keyPath);
+      }
     }
   }
-}
+
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+  }
+
+  .bd {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    /*padding-bottom: 100%;*/
+    height: 100%;
+  }
+
+  .left-bd {
+    flex-basis: 600px;
+    flex-grow: 0;
+  }
+
+  .right-bd {
+    flex-basis: 100px;
+    flex-grow: 1;
+  }
+
+  .main {
+    height: 50%;
+  }
+
+  .product {
+    height: 300px;
+  }
+
 </style>

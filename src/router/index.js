@@ -5,6 +5,7 @@ import HelloWorld from '@/components/HelloWorld'
 import Login from '@/components/Login/login'
 import Register from '@/components/Login/register'
 import HOME from '@/components/home/index'
+import UserManager from '@/components/userManage/userInfo'
 
 import API from '../api/resources'
 
@@ -25,6 +26,11 @@ export default new Router({
       path: '/register',
       name: 'Register',
       component: Register
+    },
+    {
+      path:'/userManager',
+      name:'UserManager',
+      component:UserManager
     },
     {
       path: '/p/index',

@@ -37,6 +37,25 @@ export const doLogin = (that, data) => {
     })
 }
 
+//获取用户信息
+export const getUserInfo = (that) => {
+  let accessToken = sessionStorage.getItem('accessToken');
+  return api.getUserInfo(accessToken).then(res => {
+    if (res.data.code === 0) {
+      return res.data;
+    } else if (res.data.code === 1) {
+      showMsg(that, true, "系统繁忙", 'error')
+    } else if (res.data.code === 44) {
+      showMsg(that, true, "用户尚未登陆", 'error')
+      router.push({
+        path: '/login'
+      })
+    }
+  }).catch(err => {
+    console.log(err)
+  })
+}
+
 // doRegister
 export const doRegister = (that, data) => {
   store.dispatch('updateCaptchaMsg', '发送验证码');
@@ -58,16 +77,37 @@ export const doRegister = (that, data) => {
     })
 }
 
+
+//updateBasicUserIfno
+export const updateBasicUserInfo = (that, data) => {
+  api.updateUserInfo(data)
+    .then(res => {
+      if (res.data.code === 0) {
+        showMsg(that, true, '更新基本信息成功', 'success')
+      } else if (res.data.code === 1) {
+        showMsg(that, true, '系统繁忙', 'error')
+      } else if (res.data.code === 44) {
+        showMsg(that, true, '您尚未登陆', 'error')
+        router.push({
+        path: '/login'
+      })
+      }
+    })
+    .catch(err => {
+      console.log(err)
+    })
+}
+
 // sendCaptcha
 export const sendCaptcha = (that, data) => {
   store.dispatch('updateCaptchaMsg', '正在发送')
-  store.dispatch('updateCaptButtonAble',true)
+  store.dispatch('updateCaptButtonAble', true)
 
   let timeFlag = 60
   let flag = setInterval(function () {
     if (timeFlag === 0) {
       clearInterval(flag);
-      store.dispatch('updateCaptButtonAble',false)
+      store.dispatch('updateCaptButtonAble', false)
       store.dispatch('updateCaptchaMsg', '再次发送')
     } else {
       // timeFlag = timeFlag - 1 ;

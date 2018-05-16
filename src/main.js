@@ -9,8 +9,13 @@ import store from './vuex/store'
 import iView from 'iview';
 import 'iview/dist/styles/iview.css';
 
+// 引入mavon-editor
+import mavonEditor from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
+
 Vue.use(ElementUI);
 Vue.use(iView);
+Vue.use(mavonEditor)
 
 Vue.config.productionTip = false
 

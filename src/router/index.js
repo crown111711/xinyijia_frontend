@@ -6,6 +6,10 @@ import Login from '@/components/Login/login'
 import Register from '@/components/Login/register'
 import HOME from '@/components/home/index'
 import UserManager from '@/components/userManage/userInfo'
+import AddProd from '@/components/admin/products/addprod.vue'
+import AddBusiness from '@/components/admin/products/addBusiness'
+import Test from '@/components/admin/products/test.vue'
+
 
 import API from '../api/resources'
 
@@ -31,6 +35,21 @@ export default new Router({
       path:'/userManager',
       name:'UserManager',
       component:UserManager
+    },
+    {
+      path:'/addProd',
+      name:'AddProd',
+      component:AddProd
+    },
+    {
+      path: '/addBusiness',
+      name: 'addBusiness',
+      component:AddBusiness
+    },
+    {
+      path:'/test',
+      name:'Test',
+      component:Test
     },
     {
       path: '/p/index',

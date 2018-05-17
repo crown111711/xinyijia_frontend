@@ -7,8 +7,14 @@ import Register from '@/components/Login/register'
 import HOME from '@/components/home/index'
 import UserManager from '@/components/userManage/userInfo'
 import AddProd from '@/components/admin/products/addprod.vue'
+import AllProds from '@/components/admin/products/allprods'
 import AddBusiness from '@/components/admin/products/addBusiness'
+import AddNews from '@/components/admin/news/addNews'
+import AllNews from '@/components/admin/news/allnews'
+
+
 import Test from '@/components/admin/products/test.vue'
+
 
 
 import API from '../api/resources'
@@ -42,9 +48,25 @@ export default new Router({
       component:AddProd
     },
     {
+      path:'/allprods',
+      name:'AllProds',
+      component:AllProds
+    },
+    {
       path: '/addBusiness',
       name: 'addBusiness',
       component:AddBusiness
+    },
+    {
+      path: '/addNews',
+      name: 'addNews',
+      component:AddNews
+    },
+    {
+      path: '/allNews',
+      name: 'allNews',
+      component: AllNews
+    
     },
     {
       path:'/test',

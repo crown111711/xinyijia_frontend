@@ -7,7 +7,13 @@ export default new Vuex.Store({
   state: {
     showLogin: false,
     captchaMsg: '发送验证码',
-    captButtonAble: false
+    captButtonAble: false,
+    isAdmin: false,
+    businessInfos: {
+      data: [],
+      searchTime: [],
+      pageCount: 0
+    }
   },
   mutations: {
     SHOW_LOGIN(state) {
@@ -21,6 +27,12 @@ export default new Vuex.Store({
     },
     UPDATE_CAPTBUTTONABLE_DATA(state, data) {
       state.captButtonAble = data
+    },
+    UPDATE_ADMIN_STATUS(state, data) {
+      state.isAdmin = data
+    },
+    UPDATE_BUSINESSINFOS(STATE, data) {
+      state.businessInfos = data
     }
   },
   actions: {
@@ -43,6 +55,16 @@ export default new Vuex.Store({
       commit
     }, data) {
       commit('UPDATE_CAPTBUTTONABLE_DATA', data)
+    },
+    updateAdminStatus({
+      commit
+    }, data) {
+      commit('UPDATE_ADMIN_STATUS', data)
+    },
+    updateBusinessInfos({
+      commit
+    }, data) {
+      commit('UPDATE_BUSINESSINFOS', data)
     }
   },
   getters: {
@@ -54,6 +76,12 @@ export default new Vuex.Store({
     },
     getCaptButtonAble: function (state) {
       return state.captButtonAble
+    },
+    isAdmin: function (state) {
+      return state.isAdmin
+    },
+    getBusinessInfo(state) {
+      return state.businessInfos
     }
   }
 })

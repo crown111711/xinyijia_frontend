@@ -20,7 +20,9 @@ export const doLogin = (that, data) => {
         sessionStorage.setItem('accessToken', res.data.accessToken)
         sessionStorage.setItem('userName', res.data.userName)
         sessionStorage.setItem('uid', res.data.uid)
+        sessionStorage.setItem('isAdmin',res.data.admin)
         store.dispatch('showLogin')
+        store.dispatch('updateAdminStatus',res.data.admin)
         showMsg(that, true, '登录成功', 'success')
         router.push({
           path: '/p/index',

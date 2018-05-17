@@ -79,6 +79,18 @@
         })
       }
     }
+    // ,
+    // created: function () {
+    //   // 主页添加键盘事件,注意,不能直接在焦点事件上添加回车
+    //   var lett = this;
+    //   document.onkeydown = function (e) {
+    //     var key = window.event.keyCode;
+    //     if (key == 13) {
+    //       lett.submitForm(formName);
+    //     }
+    //   }
+    // }
+
   }
 
 </script>

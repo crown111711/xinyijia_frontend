@@ -30,7 +30,7 @@ export default {
     return Axios.post(API.addBusiness, params)
   },
   searchProducts(params) {
-    return Axios.get(API.searchProducts + params)
+    return Axios.get(API.searchProducts+params.searchParam +"&searchBusiness="+ params.searchBusiness)
   },
   getAllProducts(params) {
     return Axios.get(API.getAllProducts)
@@ -63,9 +63,31 @@ export default {
     })
   },
   deleteNews(param) {
-    return Axios.get(API.getNews, {
+    return Axios.get(API.deleteNews, {
       params: {
         id: param
+      }
+    })
+  },
+  updateNews(params) {
+    return Axios.post(API.updateNews, params)
+  },
+  getNewsById(params) {
+    return Axios.get(API.getNewsById + params)
+  }, 
+  getProductsInBusiness(param) {
+    return Axios.get(API.getProductInBusiness, {
+      params: {
+        businessName: param.businessName,
+        businessId: param.businessId,
+        productId: param.productId
+      }
+    })
+  },
+  recommendProduct(param) {
+    return Axios.get(API.recommendProduct, {
+      params: {
+        accessToken:param
       }
     })
   }

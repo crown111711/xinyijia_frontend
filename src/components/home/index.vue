@@ -12,7 +12,7 @@
     </div>
     <el-tooltip placement="top">
       <div slot="content">点击查看更多</div>
-      <el-button  @click="handleSelect" >商品信息</el-button>
+      <el-button @click="handleSelect">下方浏览商品推荐，点击查看更多</el-button>
     </el-tooltip>
     <div class="product">
       <products></products>
@@ -27,7 +27,8 @@
   import NavMenu from './NavMenu'
   import HorseLantern from './horseLantern'
   import NewsTab from './newsTab'
-  import Products from './products'
+  import Products from './recommproducts'
+  import router from '../../router'
   export default {
     components: {
       Topbar,
@@ -44,6 +45,9 @@
     },
     methods: {
       handleSelect(key, keyPath) {
+        router.push({
+          path: '/products'
+        })
         console.log(key, keyPath);
       }
     }
@@ -68,7 +72,7 @@
   }
 
   .left-bd {
-    flex-basis: 600px;
+    flex-basis: 800px;
     flex-grow: 0;
   }
 

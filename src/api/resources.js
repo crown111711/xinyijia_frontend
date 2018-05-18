@@ -27,4 +27,14 @@ export default {
   addNews: `${NEW_ROOT}addNews`,
   getNews: `${NEW_ROOT}getNews`,
   deleteNews: `${NEW_ROOT}deleteNews`,
+  updateNews: `${NEW_ROOT}updateNews`,
+  getNewsById: `${NEW_ROOT}getNews/`,
+  getProductInBusiness: `${PRODUCT_ROOT}getProductsInBusiness`,
+  recommendProduct: `${PRODUCT_ROOT}recommendProduct`,
+  recharge: `${USER_API_ROOT}recharge`,
+  getTradeInfos: `${USER_API_ROOT}getUserTrades`,
+  buyProduct: `${USER_API_ROOT}buyProduct`,
+  addBuyCar: `${USER_API_ROOT}addBuyCar`,
+  getBuyCars: `${USER_API_ROOT}getBuyCars`,
+  deleteBuyCar:  `${USER_API_ROOT}deleteBuyCar/`
 }

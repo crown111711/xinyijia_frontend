@@ -183,7 +183,7 @@
                 message: res.data.msg,
                 offset: 200
               })
-              this.$router.push('/admin/mangenews/allnews')
+              this.$router.push('/allNews')
             })
           } else {
             console.log('需验证')

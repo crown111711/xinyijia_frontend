@@ -11,9 +11,11 @@ export default new Vuex.Store({
     isAdmin: false,
     businessInfos: {
       data: [],
-      searchTime: [],
+      searchTime: '',
       pageCount: 0
-    }
+    },
+    //购物车
+    buyCar: []
   },
   mutations: {
     SHOW_LOGIN(state) {
@@ -33,6 +35,9 @@ export default new Vuex.Store({
     },
     UPDATE_BUSINESSINFOS(STATE, data) {
       state.businessInfos = data
+    },
+    UPDATE_BUY_CAR(STATE,data){
+      state.buyCar = data
     }
   },
   actions: {
@@ -65,7 +70,12 @@ export default new Vuex.Store({
       commit
     }, data) {
       commit('UPDATE_BUSINESSINFOS', data)
-    }
+    },
+    updateBuyCar({
+     commit
+    },data){
+       commit('UPDATE_BUY_CAR', data)
+    } 
   },
   getters: {
     showState: function (state) {
@@ -82,6 +92,9 @@ export default new Vuex.Store({
     },
     getBusinessInfo(state) {
       return state.businessInfos
+    },
+    getBuyCar(state){
+      return state.buyCar
     }
   }
 })

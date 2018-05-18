@@ -12,9 +12,45 @@ export default {
     return Axios.post(API.getCaptcha, data)
   },
   getUserInfo(data) {
-    return Axios.get(API.getUserInfo+"?accessToken="+data)
+    return Axios.get(API.getUserInfo + "?accessToken=" + data)
   },
-  updateUserInfo(data){
+  updateUserInfo(data) {
     return Axios.post(API.updateUserInfo, data)
+  },
+  recharge(data) {
+    return Axios.post(API.recharge, data)
+  },
+  addBuyCar(params) {
+    return Axios.post(API.addBuyCar, params)
+  },
+  getBuyCars(param) {
+    return Axios.get(API.getBuyCars, {
+      params: {
+        accessToken: param
+      }
+    })
+  }
+  ,
+  buyProduct(param){
+      return Axios({
+      url: API.buyProduct,
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: param
+    })
+   // return Axios.post(API.buyProduct,param)
+  }
+  ,
+  getTradeInfos(param){
+    return Axios.get(API.getTradeInfos,{
+      params: {
+        accessToken:param
+      }
+    })
+  },
+  deleteBuyCar(param){
+    return Axios.get(API.deleteBuyCar+param)
   }
 }

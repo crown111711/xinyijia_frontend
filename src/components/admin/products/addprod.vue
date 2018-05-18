@@ -9,7 +9,7 @@
       <el-form-item label="价格" prop="price">
         <el-input v-model.number="addprod.price" placeholder="请输入商品价格"></el-input>
       </el-form-item>
-       <el-form-item label="库存数量" prop="quantity">
+      <el-form-item label="库存数量" prop="quantity">
         <el-input v-model.number="addprod.quantity" placeholder="请输入商品库存"></el-input>
       </el-form-item>
 
@@ -28,8 +28,8 @@
         </el-select>
       </el-form-item>
 
-      <el-form-item label="商品类别" >
-        <el-input v-model="addprod.type" ></el-input>
+      <el-form-item label="商品类别">
+        <el-input v-model="addprod.type"></el-input>
       </el-form-item>
 
       <el-form-item label="是否上架">
@@ -67,7 +67,7 @@
     data() {
       return {
         imageUrl: '',
-        imageName:'',
+        imageName: '',
         products: [],
 
         addprod: {
@@ -78,8 +78,8 @@
           selling: true,
           desc: '',
           info: '',
-          searchIndex:'',
-          quantity:''
+          searchIndex: '',
+          quantity: ''
         },
         prodrules: {
           name: [{
@@ -105,9 +105,9 @@
               trigger: 'blur'
             }
           ],
-          type: [{
+          typename: [{
             required: true,
-            message: '商品必须选择一个类别',
+            message: '商品必须选择一个业务线',
             trigger: 'change'
           }],
           // desc: [{
@@ -115,7 +115,7 @@
           //   message: '请输入商品简介',
           //   trigger: 'blur'
           // }],
-           searchIndex: [{
+          searchIndex: [{
             required: true,
             message: '请输入商品的检索关键字',
             trigger: 'blur'
@@ -144,9 +144,9 @@
     // },
 
     computed: {
-      uploadProductImage(){
-             let accessToken = sessionStorage.getItem('accessToken')
-             return 'http://localhost:8090/xyj/api/attachment/uploadFile?type=product'+ "&accessToken="+accessToken
+      uploadProductImage() {
+        let accessToken = sessionStorage.getItem('accessToken')
+        return 'http://localhost:8090/xyj/api/attachment/uploadFile?type=product' + "&accessToken=" + accessToken
       }
 
     },
@@ -161,7 +161,7 @@
           this.products = res.data
         })
       },
-      productImg:function(){
+      productImg: function () {
 
       },
       // mavoneditor图片上传并替换地址
@@ -186,7 +186,7 @@
 
         this.imageUrl = res
         var index = res.lastIndexOf('/')
-        this.imageName = res.substring(index+1);
+        this.imageName = res.substring(index + 1);
 
         //URL.createObjectURL(file.raw)
       },
@@ -236,7 +236,7 @@
               selltime: this.addprod.selltime,
               searchIndex: this.addprod.searchIndex,
               quantity: this.addprod.quantity
-          
+
             }
             console.log(addprodpar)
             adminApi.addProduct(addprodpar).then(res => {
@@ -248,7 +248,13 @@
                 offset: 200
               })
               this.$refs.addprod.resetFields()
-              this.$router.push('/allprods')
+              // this.$router.push('/allprods')
+              this.$router.go({
+                name: 'ProductManager',
+                params: {
+                  defaultTab: "产品列表"
+                }
+              })
             })
           } else {
             this.$notify({
@@ -272,7 +278,7 @@
   @import '../../../assets/css/index.less';
 
   .addprod {
-       .learncontent;
+    .learncontent;
     .el-form {
       text-align: left;
       .el-select {

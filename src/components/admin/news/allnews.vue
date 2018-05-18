@@ -2,7 +2,7 @@
   <div class="section">
     <!-- 网站基本设置 -->
     <div class="box">
-      <h4>所有新闻动态</h4>
+      <h4> 所有新闻动态  <el-button type="primary" @click="addNews"> 添加新闻</el-button></h4>
       <el-table :data="news" align=center>
         <el-table-column min-width="20%" prop="publishTime" label="日期">
         </el-table-column>
@@ -71,7 +71,9 @@
 <script>
   import adminApi from '../../../api/adminApi'
 
-  import {parseStrToDate} from '../../../assets/js/assist.js'
+  import {
+    parseStrToDate
+  } from '../../../assets/js/assist.js'
   // import {UploadFile} from '../../../api/api'
   export default {
     data() {
@@ -137,6 +139,12 @@
         return row.category === value
       },
 
+      addNews(){
+          this.$router.push({
+            path: '/addNews'
+          })
+      },
+
       // mavoneditor图片上传并替换地址
       // 绑定@imgAdd event
       $imgAdd(pos, $file) {
@@ -146,7 +154,7 @@
         adminApi.unloadFile(formdata)
           .then(url => {
             // console.log(url)
-            console.log(this.addnews.content)
+            console.log(this.editnews.content)
             // 第二步.将返回的url替换到文本原位置![...](./0) -> ![...](url)
             this.$refs.md.$img2Url(pos, url.data)
           })
@@ -175,7 +183,7 @@
         }
         return isPIC && isLt5M
       },
-      
+
       //删除商品
       deleteNews(row, rowIndex) {
         adminApi.deleteNews(rowIndex.id).then(
@@ -229,24 +237,33 @@
         this.$refs.editnews.validate(valid => {
           if (valid) {
             const updatedParams = {
-            id: this.editnews.id,
-            type: this.editnews.type,
-            category: this.editnews.category,
-            title: this.editnews.title,
-            titleImage: this.editnews.titleImage,
-            author: this.editnews.author,
-            content: this.editnews.content,
-            publishTime:  parseStrToDate(this.editnews.publishTime,'yyyy-MM-dd hh:mm:ss')
+              id: this.editnews.id,
+              type: this.editnews.type,
+              category: this.editnews.category,
+              title: this.editnews.title,
+              titleImage: this.editnews.titleImage,
+              author: this.editnews.author,
+              content: this.editnews.content,
+              publishTime: parseStrToDate(this.editnews.publishTime, 'yyyy-MM-dd HH:mm:ss').getTime()
             }
-            EditNews(updatedParams).then(res => {
-              this.$notify({
-                title: '修改成功',
-                message: res.data.msg,
-                type: 'success',
-                offset: 100
-              })
-              this.allnews()
-              this.dialogFormVisible = false
+            adminApi.updateNews(updatedParams).then(res => {
+              if (res.data.code === 0) {
+                this.$notify({
+                  title: '修改成功',
+                  message: res.data.msg,
+                  type: 'success',
+                  offset: 100
+                })
+                this.allnews()
+                this.dialogFormVisible = false
+              } else {
+                this.$notify({
+                  title: '修改失败',
+                  message: res.data.msg,
+                  type: 'error',
+                  offset: 100
+                })
+              }
             })
           } else {
             this.$message({

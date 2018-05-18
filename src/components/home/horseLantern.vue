@@ -1,18 +1,41 @@
 <template>
   <el-carousel :interval="1000" type="card" height="200px" class="horse">
-    <el-carousel-item v-for="item in 6" :key="item">
+    <el-carousel-item v-for="item in news" :key="item">
       <!--<h3>{{ item }}</h3>-->
-      <img src= "../../assets/image/image1.jpg"> 
+      <img :src= "item.imageUrl"> 
     </el-carousel-item>
   </el-carousel>
 </template>
-<<script>
+<script>
+  import adminApi from '../../api/adminApi'
 export default {
   data () {
       return {
-          imgUrl : require('../../assets/image/image1.jpg')
+          news:[]
       }
-  }
+  },
+  methods: {
+      getnews() {
+        let par = {
+          limit: 12
+        }
+        adminApi.getNews().then(res => {
+          // console.log(res)
+          let temp = res.data.data;
+        
+          for (var i = 0; i < temp.length; i++) {
+            if(temp[i].imageUrl != null ){
+                this.news.push(temp[i])
+            }
+           // this.news[i].showMsg = this.news[i].title + " [" + this.news[i].type + "]   " + this.news[i].publishTime;
+          }
+          console.log(this.news)
+        })
+      }
+    },
+    mounted () {
+      this.getnews();
+    }
 }
 </script>
 

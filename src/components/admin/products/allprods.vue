@@ -124,7 +124,9 @@
           quantity: '',
           imageName: '',
           businessName: '',
-          imageUrl: ''
+          imageUrl: '',
+          createTime: '',
+          sellNum: '',
         },
         prodrules: {
           productName: [{
@@ -370,7 +372,9 @@
               selling: this.editprod.selling ? 1 : 0,
               productDesc: this.editprod.productDesc,
               searchIndex: this.editprod.searchIndex,
-              quantity: this.editprod.quantity
+              quantity: this.editprod.quantity,
+              createTime: this.editprod.createTime,
+              sellNum: this.editprod.sellNum
             }
             console.log(updatedParams)
             adminApi.updateProduct(updatedParams).then(res => {

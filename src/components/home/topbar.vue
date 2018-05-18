@@ -2,8 +2,6 @@
   <div class="topbar">
     <div class="title">新亿嘉</div>
     <div class="topbar-info-dropdown">
-
-
       <!--<div class="info" v-if="showLogin">
         <span>{{userName}}</span>
         <span>|</span>
@@ -11,19 +9,24 @@
         <i class="menu" v-on:click="logout" title="退出登录"></i>
       </span>
       </div>-->
-
-      <div class="info" v-if="showLogin">
+      <div class="info" v-if="isLogin">
         <el-dropdown @command="handleCommand">
           <span class="el-dropdown-link">
           {{ userName }}<i class="el-icon-arrow-down el-icon--right"></i>
       </span>
           <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item v-if="isAdmin" command="productManage">产品管理</el-dropdown-item>
+            <el-dropdown-item v-if="isAdmin" command="newsManage">新闻管理</el-dropdown-item>
             <el-dropdown-item command="userManage">用户管理</el-dropdown-item>
             <el-dropdown-item command="buyCar">我的购物车</el-dropdown-item>
             <el-dropdown-item command="logout">注销</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
 
+      </div>
+      <div class="info" v-if="notLogin">
+        <Icon type="person"></Icon>
+        <Button type="success" shape="circle" size="large" class="el-dropdown-link" @click="handleLogin">请登陆</Button>
       </div>
 
 
@@ -32,37 +35,88 @@
       </div>-->
 
 
-
     </div>
   </div>
 </template>
 
 <script>
   import router from '../../router'
+  import API from '../../api/resources'
+  import Axios from 'axios'
 
   export default {
     data() {
       return {
         userName: sessionStorage.getItem('userName'),
-        dropdownMenu: true
+        dropdownMenu: true,
+        isLogin: false,
+        isAdmin: false
       }
     },
     computed: {
-      showLogin() {
-        let res = this.$store.dispatch('showLogin')
-        return res
+     showLogin() {
+        Axios.get(API.isLogin, {
+            params: {
+              accessToken: sessionStorage.getItem('accessToken')
+            }
+          })
+          .then(res => {
+            if (res.data === true) {
+              this.isLogin = true;
+              // console.log(this.isLogin)
+            }
+          })
+          .catch(err => {
+            console.log(err)
+          })
+
+        // this.$store.getters.showState
+
       },
       showDropdown() {
         this.dropdownMenu = !this.dropdownMenu
+      },
+      notLogin() {
+        return this.isLogin == true ? false : true
+        // let res = this.$store.getters.showState
+        // return res == true ? false : true;
       }
     },
     methods: {
+
+      testAdmin() {
+        console.log(sessionStorage.getItem('isAdmin'))
+        this.isAdmin = sessionStorage.getItem('isAdmin') == "true" ? true : false
+        console.log("admin:"+this.isAdmin)
+      },
+      userLogin() {
+
+
+        Axios.get(API.isLogin, {
+            params: {
+              accessToken: sessionStorage.getItem('accessToken')
+            }
+          })
+          .then(res => {
+            if (res.data === true) {
+              this.isLogin = true;
+              console.log(this.isLogin)
+            }
+          })
+          .catch(err => {
+            console.log(err)
+          })
+
+        // this.$store.getters.showState
+      },
       logout() {
         sessionStorage.removeItem('accessToken')
         sessionStorage.removeItem('userName')
-        sessionStorage.clear()
-        router.push({
-          path: '/'
+        this.$store.dispatch('showLogin')
+        // this.userLogin()
+        // this.testAdmin()
+        router.go({
+          path: '/p/index'
         })
       },
       goToUserManage() {
@@ -72,7 +126,7 @@
       },
       goToBuyCar() {
         router.push({
-          path: '/'
+          path: '/buyCar'
         })
       },
       handleCommand(command) {
@@ -82,9 +136,29 @@
           this.logout()
         } else if (command === "buyCar") {
           this.goToBuyCar()
+        }else if(command === "productManage"){
+          router.push({
+           name: 'ProductManager',
+           params:{
+             defaultTab: "产品列表"
+           }
+          })
+        }else if(command === "newsManage"){
+          router.push({
+            path: "/allNews"
+          })
         }
+      },
+      handleLogin() {
+        router.push({
+          path: '/login'
+        })
       }
 
+    },
+    mounted() {
+      this.testAdmin()
+      this.userLogin()
     }
   }
 
@@ -109,11 +183,22 @@
     .title {
       margin: 0 20px 0 45px;
       cursor: pointer;
+      flex-grow: 0
+      
     }
+    
+     
+
   }
 
   .topbar-info-dropdown {
-
+   
+    .topPage {
+        width:  100px;
+        margin: 0 20px 0 20px;
+        cursor: right;
+       
+    }
     .info {
       width: 100px;
       margin: 0 20px 0 20px;

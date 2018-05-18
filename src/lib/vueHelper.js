@@ -20,9 +20,9 @@ export const doLogin = (that, data) => {
         sessionStorage.setItem('accessToken', res.data.accessToken)
         sessionStorage.setItem('userName', res.data.userName)
         sessionStorage.setItem('uid', res.data.uid)
-        sessionStorage.setItem('isAdmin',res.data.admin)
+        sessionStorage.setItem('isAdmin', res.data.admin)
         store.dispatch('showLogin')
-        store.dispatch('updateAdminStatus',res.data.admin)
+        store.dispatch('updateAdminStatus', res.data.admin)
         showMsg(that, true, '登录成功', 'success')
         router.push({
           path: '/p/index',
@@ -38,6 +38,27 @@ export const doLogin = (that, data) => {
       console.log(err)
     })
 }
+
+
+//加入购物车
+export const addBuyCar = (that, params) => {
+  return api.addBuyCar(params).then(res => {
+    if (res.data.code === 0) {
+      showMsg(that, true, "加入购物车成功", 'success')
+      router.push({
+        path: '/buyCar'
+      })
+    } else(
+      showMsg(that, true, "系统繁忙", 'error')
+    )
+
+  }).catch(err =>{
+    console.log(err)
+  })
+
+}
+
+
 
 //获取用户信息
 export const getUserInfo = (that) => {
@@ -91,8 +112,8 @@ export const updateBasicUserInfo = (that, data) => {
       } else if (res.data.code === 44) {
         showMsg(that, true, '您尚未登陆', 'error')
         router.push({
-        path: '/login'
-      })
+          path: '/login'
+        })
       }
     })
     .catch(err => {

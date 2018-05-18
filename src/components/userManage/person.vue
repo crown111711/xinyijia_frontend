@@ -3,7 +3,17 @@
 
     <FormItem label="头像" class="phHold">
       <!--<Input class="input" v-model="formItem.input" placeholder="请输入你的姓名" clearable></Input>-->
+      <!--<el-upload class="prod-image" :action="uploadProductImage" :show-file-list="false" :on-success="handleSuccess" :before-upload="beforeUpload">
+
       <img :src="formItem.imageIcon" class=img />
+        <i v-else class="el-icon-plus prod-uploader-icon"></i>
+              </el-upload>-->
+
+      <el-upload class="prod-image" :action="uploadProductImage" :show-file-list="false" :on-success="handleSuccess" :before-upload="beforeUpload">
+        <img v-if="imageUrl" :src="imageUrl" class="cur-image" title="点击可更换头像" alt=''>
+        <i v-else class="el-icon-plus prod-uploader-icon"></i>
+      </el-upload>
+
     </FormItem>
 
     <FormItem label="姓名" class=input>
@@ -83,7 +93,9 @@
   import {
     getUserInfo
   } from '../../lib/vueHelper'
-  import { updateBasicUserInfo } from '../../lib/vueHelper'
+  import {
+    updateBasicUserInfo
+  } from '../../lib/vueHelper'
 
   import api from '../../api/index'
   import bus from '../../assets/js/eventBus'
@@ -92,6 +104,8 @@
     data() {
       // this.formItem = getUserInfo(this).data
       return {
+        imageUrl: '',
+        imageName: '',
         formItem: {
           userName: 'tanjia',
           telNum: '',
@@ -112,11 +126,34 @@
       //   });
     },
     methods: {
+
+      handleSuccess(res, file) {
+        this.imageUrl = res
+        var index = res.lastIndexOf('/')
+        this.imageName = res.substring(index + 1)
+        this.formItem.imageIcon = this.imageName
+      },
+      // 商品主图再上传前对文件进行判断
+      beforeUpload(file) {
+        const isPIC = file.type === 'image/jpeg' || 'image/png'
+        const isLt5M = file.size / 1024 / 1024 < 5
+
+        if (!isPIC) {
+          this.$message.error('上传图片只能是 JPG或PNG 格式!')
+        }
+        if (!isLt5M) {
+          this.$message.error('上传图片大小不能超过 5MB!')
+        }
+        return isPIC && isLt5M
+      },
+
+
       getUserInfo: function () {
         let accessToken = sessionStorage.getItem('accessToken');
         api.getUserInfo(accessToken).then(res => {
           if (res.data.code === 0) {
             this.formItem = res.data;
+            this.imageUrl = "http://localhost:8090/xyj/api/attachment/showImage/" + res.data.imageIcon;
             //this.formItem.imageIcon = require('./../../assets/image/2.jpg')
           } else if (res.data.code === 1) {
             showMsg(this, true, "系统繁忙", 'error')
@@ -127,10 +164,16 @@
           console.log(err)
         })
       },
-      updateUserInfo(){
-          var data = this.formItem;
-          data.accessToken = sessionStorage.getItem('accessToken')
-          updateBasicUserInfo(this,data)
+      updateUserInfo() {
+        var data = this.formItem;
+        data.accessToken = sessionStorage.getItem('accessToken')
+        updateBasicUserInfo(this, data)
+      }
+    },
+    computed: {
+      uploadProductImage() {
+        let accessToken = sessionStorage.getItem('accessToken')
+        return 'http://localhost:8090/xyj/api/attachment/uploadFile?type=user' + "&accessToken=" + accessToken
       }
     },
     created() {

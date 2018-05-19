@@ -195,7 +195,7 @@
                 this.$notify({
                   title: '成功！',
                   type: 'success',
-                  message: res.data.msg,
+                //   message: res.data.msg,
                   offset: 200
                 })
                 //this.$router.push('/allNews')

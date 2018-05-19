@@ -1,5 +1,6 @@
 <template>
   <div class="layout">
+    <Topbar> </Topbar>
     <Layout :style="{minHeight: '100vh'}">
       <Sider collapsible :collapsed-width="78" v-model="isCollapsed">
         <Menu :active-name="defaultTab" theme="dark" width="auto" :class="menuitemClasses" @on-select="menuSelect">
@@ -47,6 +48,7 @@
   import tradeList from './tradeList'
   import api from '../../api/index'
   import bus from '../../assets/js/eventBus'
+  import Topbar from '../home/topbar'
   import {
     getUserInfo
   } from '../../lib/vueHelper'
@@ -65,7 +67,8 @@
     },
     components: {
       vPerson,
-      tradeList
+      tradeList,
+      Topbar
     },
     created() {
       console.log(this.$refs)
@@ -179,6 +182,8 @@
         this.selectItem = this.$route.params.defaultTab
       }
       console.log(this.defaultTab)
+
+       this.$store.dispatch('updateIsHome', false)
     }
   }
 

@@ -17,6 +17,9 @@ export default {
   updateUserInfo(data) {
     return Axios.post(API.updateUserInfo, data)
   },
+  updateUserImage(data) {
+    return Axios.post(API.updateUserImage, data)
+  },
   recharge(data) {
     return Axios.post(API.recharge, data)
   },
@@ -29,10 +32,9 @@ export default {
         accessToken: param
       }
     })
-  }
-  ,
-  buyProduct(param){
-      return Axios({
+  },
+  buyProduct(param) {
+    return Axios({
       url: API.buyProduct,
       method: 'post',
       headers: {
@@ -40,17 +42,16 @@ export default {
       },
       data: param
     })
-   // return Axios.post(API.buyProduct,param)
-  }
-  ,
-  getTradeInfos(param){
-    return Axios.get(API.getTradeInfos,{
+    // return Axios.post(API.buyProduct,param)
+  },
+  getTradeInfos(param) {
+    return Axios.get(API.getTradeInfos, {
       params: {
-        accessToken:param
+        accessToken: param
       }
     })
   },
-  deleteBuyCar(param){
-    return Axios.get(API.deleteBuyCar+param)
+  deleteBuyCar(param) {
+    return Axios.get(API.deleteBuyCar + param)
   }
 }

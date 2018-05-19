@@ -5,11 +5,17 @@ import HelloWorld from '@/components/HelloWorld'
 import Login from '@/components/Login/login'
 import Register from '@/components/Login/register'
 import HOME from '@/components/home/index'
+import DownFile from '@/components/home/downFile'
+import AboutCompany from '@/components/home/aboutCompany'
+import RecruitCompany from '@/components/home/recruitCompany'
+
+import Callus from '@/components/home/callus'
 import UserManager from '@/components/userManage/userInfo'
 import BuyCar from '@/components/userManage/buyCar'
 
 import AddProd from '@/components/admin/products/addprod.vue'
 import ProductManager from '@/components/admin/products/productmanager'
+import CompanyManager from '@/components/admin/company/companymanager'
 
 import AllProds from '@/components/admin/products/allprods'
 import AddBusiness from '@/components/admin/products/addBusiness'
@@ -44,36 +50,69 @@ export default new Router({
     {
       path: '/userManager',
       name: 'UserManager',
+      meta: {
+        requireUser: true
+      },
       component: UserManager
+    }, {
+      path: '/aboutCompany',
+      name: 'AboutCompany',
+      component: AboutCompany
     },
     {
       path: '/addProd',
       name: 'AddProd',
+      meta: {
+        requireAdmin: true
+      },
       component: AddProd
     },
-     {
+    {
       path: '/productmanager',
       name: 'ProductManager',
+      meta: {
+        requireAdmin: true
+      },
       component: ProductManager
+    },
+    {
+      path: `/companymanager`,
+      name: 'CompanyManager',
+      meta: {
+        requireAdmin: true
+      },
+      component: CompanyManager
     },
     {
       path: '/allprods',
       name: 'AllProds',
+      meta: {
+        requireAdmin: true
+      },
       component: AllProds
     },
     {
       path: '/addBusiness',
       name: 'addBusiness',
+      meta: {
+        requireAdmin: true
+      },
       component: AddBusiness
     },
     {
       path: '/addNews',
       name: 'addNews',
+      meta: {
+        requireAdmin: true
+      },
       component: AddNews
     },
     {
       path: '/allNews',
       name: 'allNews',
+      meta: {
+        requireAdmin: true
+      },
       component: AllNews
 
     },
@@ -94,10 +133,12 @@ export default new Router({
     {
       path: '/buyCar',
       name: 'buyCar',
+      meta: {
+        requireUser: true
+      },
       component: BuyCar
 
-    }
-    , {
+    }, {
       path: '/products',
       name: 'products',
       class: 'el-icon-goods',
@@ -108,17 +149,30 @@ export default new Router({
         path: '/product/:class',
         component: ProductList
       }]
-    },{
-     
-        path: '/product/:class/:id',
-        name: ProductContent,
-        component: ProductContent
-    
+    }, {
+
+      path: '/product/:class/:id',
+      name: ProductContent,
+      component: ProductContent
+
     },
     {
       path: '/test',
       name: 'Test',
       component: Test
+    }, {
+      path: '/downFile',
+      name: 'DownFile',
+      component: DownFile
+    },
+    {
+      path: '/callus',
+      name: 'Callus',
+      component: Callus
+    }, {
+      path: '/recruitCompany',
+      name: 'RecruitCompany',
+      component: RecruitCompany
     },
     {
       path: '/p/index',

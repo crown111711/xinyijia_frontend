@@ -5,6 +5,7 @@ var USER_API_ROOT = config.USER_API_ROOT
 var PRODUCT_ROOT = config.PRODUCT_API_ROOT
 var ATTACHMENT_ROOT = config.ATTACHMENT_API_ROOT
 var NEW_ROOT = config.NEW_API_ROOT
+var COMPANY_ROOT = config.COMPANY_API_ROOT
 
 export default {
   login: `${USER_API_ROOT}login`,
@@ -36,5 +37,11 @@ export default {
   buyProduct: `${USER_API_ROOT}buyProduct`,
   addBuyCar: `${USER_API_ROOT}addBuyCar`,
   getBuyCars: `${USER_API_ROOT}getBuyCars`,
-  deleteBuyCar:  `${USER_API_ROOT}deleteBuyCar/`
+  deleteBuyCar: `${USER_API_ROOT}deleteBuyCar/`,
+  getDownFile: `${ATTACHMENT_ROOT}getDownFile`,
+  getCompany: `${COMPANY_ROOT}getCompany`,
+  updateBasicInfo: `${COMPANY_ROOT}updateBasicInfo`,
+  getAbout: `${COMPANY_ROOT}getAbout`,
+  updateUserImage: `${USER_API_ROOT}updateUserInfoImageIcon`
+
 }

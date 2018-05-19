@@ -132,6 +132,22 @@
         var index = res.lastIndexOf('/')
         this.imageName = res.substring(index + 1)
         this.formItem.imageIcon = this.imageName
+        let param = {
+          accessToken: sessionStorage.getItem('accessToken'),
+          imageIcon : this.imageName
+        }
+
+        api.updateUserImage(param).then(res => {
+          if (res.data.code === 0) {
+            this.$notify({
+              title: '成功！',
+              type: 'success',
+               message: '上传图片成功',
+              offset: 200
+            })
+          }
+        })
+
       },
       // 商品主图再上传前对文件进行判断
       beforeUpload(file) {

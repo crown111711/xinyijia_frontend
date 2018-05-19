@@ -1,5 +1,7 @@
 <template>
   <div class="container">
+    <Topbar></Topbar>
+    <NavMenu></NavMenu>
     <el-row type="flex" class="row-bg" justify="center">
       <el-col class="menu-box" :span="5">
         <p></p>
@@ -21,6 +23,8 @@
 </template>
 <script>
   import adminApi from '../../../api/adminApi'
+  import Topbar from '../topbar'
+  import NavMenu from '../NavMenu'
   export default {
     data() {
       return {
@@ -29,6 +33,10 @@
         loading: false,
         productclass: []
       }
+    },
+    components: {
+      Topbar,
+      NavMenu
     },
     computed: {
       key() {
@@ -52,6 +60,12 @@
     },
     mounted() {
       this.getAllBusiness()
+      this.$store.dispatch('updateIsHome', false)
+      this.$store.dispatch('updateNavIndex', 'product');
+    },
+    created() {
+      this.$store.dispatch('updateIsHome', false)
+      this.$store.dispatch('updateNavIndex', 'product');
     }
   }
 

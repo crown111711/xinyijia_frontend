@@ -44,6 +44,9 @@
         this.defaultTab = this.$route.params.defaultTab
         this.selectItem = this.$route.params.defaultTab
       }
+
+      //按照设计用到topbar组件的地方都要更新这个，目的是重定向的问题
+      this.$store.dispatch('updateIsHome', false)
     }
   };
 

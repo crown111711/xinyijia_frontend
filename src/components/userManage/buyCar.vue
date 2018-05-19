@@ -98,7 +98,14 @@
                 message: "购买失败，余额不足",
                 type: "error"
               })
+            } else if (res.data.code === 3) {
+              this.$message({
+                showClose: true,
+                message: "购买失败，库存不足",
+                type: "error"
+              })
             }
+
           }
         )
 

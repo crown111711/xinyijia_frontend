@@ -1,8 +1,12 @@
 <template>
   <div class="section">
+    <Topbar></Topbar>
     <!-- 网站基本设置 -->
     <div class="box">
-      <h4> 所有新闻动态  <el-button type="primary" @click="addNews"> 添加新闻</el-button></h4>
+      <div class="title">
+        <h4 class='h'> 所有新闻动态</h4>
+        <el-button type="primary" @click="addNews" class='bt'> 添加新闻</el-button>
+      </div>
       <el-table :data="news" align=center>
         <el-table-column min-width="20%" prop="publishTime" label="日期">
         </el-table-column>
@@ -32,9 +36,9 @@
         <el-form ref="editnews" label-position="top" :rules="addnewsRules" :model="editnews">
           <el-form-item label="新闻标题" prop="title">
             <el-input v-model="editnews.title" placeholder="请输入标题"></el-input>
-          </el-form-item>
+          </el-form-item> 
           <el-form-item label="标题图片">
-            <el-upload class="img" action="uploadProductImage" :show-file-list="false" :on-success="handleSuccess" :before-upload="beforeUpload">
+            <el-upload class="img" :action="uploadProductImage" :show-file-list="false" :on-success="handleSuccess" :before-upload="beforeUpload">
               <img v-if="editnews.imageUrl" :src="editnews.imageUrl" class="cur-image">
               <i v-else class="el-icon-plus uploader-icon"></i>
             </el-upload>
@@ -70,6 +74,7 @@
 </template>
 <script>
   import adminApi from '../../../api/adminApi'
+  import Topbar from "../../home/topbar"
 
   import {
     parseStrToDate
@@ -133,16 +138,19 @@
         }
       }
     },
+    components: {
+      Topbar
+    },
     methods: {
 
       filterType(value, row) {
         return row.category === value
       },
 
-      addNews(){
-          this.$router.push({
-            path: '/addNews'
-          })
+      addNews() {
+        this.$router.push({
+          path: '/addNews'
+        })
       },
 
       // mavoneditor图片上传并替换地址
@@ -168,7 +176,8 @@
         this.imageUrl = res
         var index = res.lastIndexOf('/')
         this.imageName = res.substring(index + 1);
-        this.addnews.titleImage = this.imageName
+        this.editnews.imageUrl = res
+        this.editnews.titleImage = this.imageName
       },
       // 商品主图再上传前对文件进行判断
       beforeUpload(file) {
@@ -293,6 +302,20 @@
   @import '../../../assets/css/index.less';
   .section {
     .box {
+      .title {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .h {
+          margin-left: 500px;
+          font-size: 25px; // flex-basis: 300px
+        }
+
+        .bt {
+          margin-right: 200px
+        }
+      }
       .learncontent;
       .el-table {
         .table-img {
@@ -302,7 +325,7 @@
       .el-dialog {
         .img {
           width: 400px;
-          height: 200px;
+          height: 400px;
           border: 1px dashed #d9d9d9;
           border-radius: 6px;
           cursor: pointer;

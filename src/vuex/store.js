@@ -15,7 +15,10 @@ export default new Vuex.Store({
       pageCount: 0
     },
     //购物车
-    buyCar: []
+    buyCar: [],
+    isHome: false,
+    navIndex: 'home',
+    siteoption: {}
   },
   mutations: {
     SHOW_LOGIN(state) {
@@ -33,11 +36,17 @@ export default new Vuex.Store({
     UPDATE_ADMIN_STATUS(state, data) {
       state.isAdmin = data
     },
-    UPDATE_BUSINESSINFOS(STATE, data) {
+    UPDATE_BUSINESSINFOS(state, data) {
       state.businessInfos = data
     },
-    UPDATE_BUY_CAR(STATE,data){
+    UPDATE_BUY_CAR(state, data){
       state.buyCar = data
+    },
+    UPDATE_IS_HOME(state, data){
+      state.isHome = data
+    },
+    UPDATE_NAV_INDEX(state , data){
+      state.navIndex = data
     }
   },
   actions: {
@@ -75,6 +84,16 @@ export default new Vuex.Store({
      commit
     },data){
        commit('UPDATE_BUY_CAR', data)
+    } ,
+    updateIsHome({
+     commit
+    },data){
+       commit('UPDATE_IS_HOME', data)
+    } ,
+    updateNavIndex({
+      commit
+    } ,data){
+      commit('UPDATE_NAV_INDEX' , data)
     } 
   },
   getters: {
@@ -90,11 +109,20 @@ export default new Vuex.Store({
     isAdmin: function (state) {
       return state.isAdmin
     },
-    getBusinessInfo(state) {
+    getBusinessInfo: function(state) {
       return state.businessInfos
     },
-    getBuyCar(state){
+    getBuyCar: function(state){
       return state.buyCar
+    },
+    getIsHome: function(state){
+      return state.isHome
+    },
+    getNavIndex: function(state){
+      return state.navIndex
+    },
+    getSiteOperation: function(state){
+      return state.siteoption
     }
   }
 })

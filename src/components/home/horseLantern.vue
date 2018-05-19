@@ -1,6 +1,6 @@
 <template>
   <el-carousel :interval="1000" type="card" height="200px" class="horse">
-    <el-carousel-item v-for="item in news" :key="item">
+    <el-carousel-item v-for="item in news" :key="item.id">
       <!--<h3>{{ item }}</h3>-->
       <img :src= "item.imageUrl"> 
     </el-carousel-item>

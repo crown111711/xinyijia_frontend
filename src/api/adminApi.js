@@ -90,6 +90,22 @@ export default {
         accessToken:param
       }
     })
+  },
+  getDownFile(){
+    return Axios.get(API.getDownFile)
+  },
+  getCompany(){
+    return Axios.get(API.getCompany)
+  },
+  updateBasicInfo(params){
+    return Axios.post(API.updateBasicInfo,params)
+  },
+  getAbout(param){
+    return Axios.get(API.getAbout, {
+      params: {
+        category:param
+      }
+    })
   }
 
 }

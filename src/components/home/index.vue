@@ -17,6 +17,7 @@
     <div class="product">
       <products></products>
     </div>
+    <Footer class="footer"></Footer>
 
   </div>
 </template>
@@ -29,13 +30,16 @@
   import NewsTab from './newsTab'
   import Products from './recommproducts'
   import router from '../../router'
+  import Footer from './footer'
+  
   export default {
     components: {
       Topbar,
       NavMenu,
       HorseLantern,
       NewsTab,
-      Products
+      Products,
+      Footer
     },
     data() {
       return {}
@@ -48,8 +52,13 @@
         router.push({
           path: '/products'
         })
+        this.$store.dispatch('updateIsHome', false)
         console.log(key, keyPath);
       }
+    },
+    created () {
+      this.$store.dispatch('updateIsHome', true)
+      this.$store.dispatch('updateNavIndex', 'home');
     }
   }
 
@@ -72,7 +81,7 @@
   }
 
   .left-bd {
-    flex-basis: 800px;
+    flex-basis: 500px;
     flex-grow: 0;
   }
 
@@ -86,7 +95,10 @@
   }
 
   .product {
-    height: 300px;
+    /*height: 300px;*/
+  }
+  .footer {
+    
   }
 
 </style>

@@ -1,17 +1,20 @@
 <template>
   <div>
     <Topbar> </Topbar>
-    <el-tabs v-model="defaultTab" @tab-click="handleClick">
+    <el-tabs v-model="defaultTab">
       <el-tab-pane label="基本信息" name="基本信息">
-          <CompanyBasic> </CompanyBasic>
+        <CompanyBasic> </CompanyBasic>
       </el-tab-pane>
       <!--<el-tab-pane label="资质荣誉" name="资质荣誉">
       </el-tab-pane>-->
       <el-tab-pane label="关于新亿嘉" name="关于新亿嘉">
-          <About></About>
+        <About></About>
       </el-tab-pane>
       <el-tab-pane label="招贤纳士" name="招贤纳士">
-          <recruit> </recruit>
+        <recruit> </recruit>
+      </el-tab-pane>
+      <el-tab-pane label="文件上传" name="文件上传">
+        <uploadFile></uploadFile>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -22,18 +25,20 @@
   import CompanyBasic from './companyBasic'
   import About from './about'
   import recruit from './recruit'
+  import uploadFile from './uploadFile'
   export default {
     data() {
       return {
         company: {},
-        defaultTab:'基本信息'
+        defaultTab: '基本信息'
       }
     },
     components: {
       Topbar,
       CompanyBasic,
       About,
-      recruit
+      recruit,
+      uploadFile
     },
     created() {
       this.$store.dispatch('updateIsHome', false)

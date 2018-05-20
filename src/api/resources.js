@@ -42,6 +42,8 @@ export default {
   getCompany: `${COMPANY_ROOT}getCompany`,
   updateBasicInfo: `${COMPANY_ROOT}updateBasicInfo`,
   getAbout: `${COMPANY_ROOT}getAbout`,
-  updateUserImage: `${USER_API_ROOT}updateUserInfoImageIcon`
+  updateUserImage: `${USER_API_ROOT}updateUserInfoImageIcon` ,
+  deleteFile: `${ATTACHMENT_ROOT}deleteFile`,
+  updateAttachment: `${ATTACHMENT_ROOT}updateFile`
 
 }

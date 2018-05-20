@@ -30,7 +30,7 @@ export default {
     return Axios.post(API.addBusiness, params)
   },
   searchProducts(params) {
-    return Axios.get(API.searchProducts+params.searchParam +"&searchBusiness="+ params.searchBusiness)
+    return Axios.get(API.searchProducts + params.searchParam + "&searchBusiness=" + params.searchBusiness)
   },
   getAllProducts(params) {
     return Axios.get(API.getAllProducts)
@@ -74,7 +74,7 @@ export default {
   },
   getNewsById(params) {
     return Axios.get(API.getNewsById + params)
-  }, 
+  },
   getProductsInBusiness(param) {
     return Axios.get(API.getProductInBusiness, {
       params: {
@@ -87,23 +87,33 @@ export default {
   recommendProduct(param) {
     return Axios.get(API.recommendProduct, {
       params: {
-        accessToken:param
+        accessToken: param
       }
     })
   },
-  getDownFile(){
+  getDownFile() {
     return Axios.get(API.getDownFile)
   },
-  getCompany(){
+  getCompany() {
     return Axios.get(API.getCompany)
   },
-  updateBasicInfo(params){
-    return Axios.post(API.updateBasicInfo,params)
+  updateBasicInfo(params) {
+    return Axios.post(API.updateBasicInfo, params)
   },
-  getAbout(param){
+  updateFile(params) {
+    return Axios.post(API.updateAttachment, params)
+  },
+  getAbout(param) {
     return Axios.get(API.getAbout, {
       params: {
-        category:param
+        category: param
+      }
+    })
+  },
+  deleteFile(param) {
+    return Axios.get(API.deleteFile, {
+      params: {
+        fileName: param
       }
     })
   }

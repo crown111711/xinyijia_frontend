@@ -2,7 +2,7 @@
   <div>
     <Topbar></Topbar>
     <NavMenu></NavMenu>
-    <el-form :model="company" :rules="rules" ref="company" label-width="100px" class="demo-ruleForm">
+    <el-form :model="company" ref="company" label-width="100px" class="demo-ruleForm">
       <el-form-item label="公司名称" prop="companyName">
         <el-input v-model="company.companyName" readonly></el-input>
       </el-form-item>

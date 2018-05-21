@@ -2,19 +2,21 @@
   <el-carousel :interval="1000" type="card" height="200px" class="horse">
     <el-carousel-item v-for="item in news" :key="item.id">
       <!--<h3>{{ item }}</h3>-->
-      <img :src= "item.imageUrl"> 
+      <router-link :to="'/newsContent/'+item.id" :key="item.id">
+        <img :src="item.imageUrl">
+      </router-link>
     </el-carousel-item>
   </el-carousel>
 </template>
 <script>
   import adminApi from '../../api/adminApi'
-export default {
-  data () {
+  export default {
+    data() {
       return {
-          news:[]
+        news: []
       }
-  },
-  methods: {
+    },
+    methods: {
       getnews() {
         let par = {
           limit: 12
@@ -22,30 +24,30 @@ export default {
         adminApi.getNews().then(res => {
           // console.log(res)
           let temp = res.data.data;
-        
+
           for (var i = 0; i < temp.length; i++) {
-            if(temp[i].imageUrl != null ){
-                this.news.push(temp[i])
+            if (temp[i].imageUrl != null) {
+              this.news.push(temp[i])
             }
-           // this.news[i].showMsg = this.news[i].title + " [" + this.news[i].type + "]   " + this.news[i].publishTime;
+            // this.news[i].showMsg = this.news[i].title + " [" + this.news[i].type + "]   " + this.news[i].publishTime;
           }
           console.log(this.news)
         })
       }
     },
-    mounted () {
+    mounted() {
       this.getnews();
     }
-}
+  }
+
 </script>
 
-<style scoped >
-
-.horse {
+<style scoped>
+  .horse {
     /*width: 500px;*/
-    height:100%;
+    height: 100%;
     background-color: #666666;
-    }
+  }
 
   .el-carousel__item h3 {
     color: #475669;
@@ -58,8 +60,9 @@ export default {
   .el-carousel__item:nth-child(2n) {
     background-color: #99a9bf;
   }
-  
+
   .el-carousel__item:nth-child(2n+1) {
     background-color: #d3dce6;
   }
+
 </style>

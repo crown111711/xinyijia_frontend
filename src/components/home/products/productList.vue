@@ -13,12 +13,15 @@
       <h1 v-text="$route.params.class"></h1>
     </div>
     <!-- <p>共{{productlist.length}}个商品</p> -->
-    <el-row class="main">
-      <template v-for="item in productlist">
-        <el-col :span="7" :xs="22" class="item hvr-float-shadow" :key="item.businessName">
+    <el-row class="main" style="margin:20px auto;max-width: 1200px"   :offset="0">
+      <!--<template v-for="item in productlist">-->
+        <el-col :span="7" style="margin-bottom:40px;" v-for="item in productlist" :xs="22" class="item hvr-float-shadow" :key="item.businessName">
+          <el-card :body-style="{padding: '0px'}">
+            <div style="height: 250px;overflow:hidden">
           <router-link :to="'/product/'+item.businessName+'/'+item.id" :key="item.id">
-            <img class="hvr-bob" :src="item.imageUrl">
+            <img style="width: 100%;display: block;" class="hvr-bob" :src="item.imageUrl">
           </router-link>
+            </div>
           <div class="onpic">
             <p v-if="item.selling" class="hot">热销中</p>
             <p v-else class="nhot">未上市</p>
@@ -30,8 +33,9 @@
           <el-button type="text" class="button" @click="addBuyCar(item)"> <Icon type="ios-cart"></Icon>加入购物车</el-button>
           <!--<span class="textOld" v-if="sender">￥{{item.price * sender.zhekou * 0.1}}</span>-->
           </p>
+          </el-card>
         </el-col>
-      </template>
+      <!--</template>-->
     </el-row>
     <!-- 分页 -->
     <!-- <div class="page">
@@ -183,15 +187,16 @@
     .item {
       margin: 25px 10px;
       /* background: #f2f3f2; */
-      box-shadow: 0 5px 5px #ccc;
-      border-top: 1px solid #ccc;
-      /* border: 1px solid #ccc; */
-      border-radius: 15px;
+      // box-shadow: 0 5px 5px #ccc;
+      // border-top: 1px solid #ccc;
+      // /* border: 1px solid #ccc; */
+      // border-radius: 15px;
       .onpic {
-        position: absolute;
+        position: relative;
         top: 20px;
         right: 20px;
         opacity: .7;
+        left: 100px;
         .hot {
           background: #bb4945;
           color: rgb(231, 228, 228);
@@ -237,8 +242,7 @@
     margin-right: 40px;
   }
 
-  .price,
-  .sellnum {
+  .price,.sellnum {
     color: gray;
   }
 

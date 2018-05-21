@@ -1,11 +1,13 @@
 <template>
 
-  <el-row>
-    <el-col :span="4" v-for="item in products" :key="item.id" :offset="0 ">
+  <el-row style="margin: 20px auto" :gutter="20">
+    <el-col   style="margin-bottom: 40px;"  :span="6" v-for="item in products" :key="item.id" :offset="0 ">
       <el-card :body-style="{ padding: '14px' }">
+         <div style="height: 250px;overflow:hidden">
         <router-link :to="'/product/'+ item.businessName +'/'+item.id" :key="item.id">
           <img :src="item.imageUrl" class="image" title="点击图片查看商品详情">
         </router-link>
+         </div>
         <div style="padding: 14px;">
           <span>{{item.productName}}</span>
           <div class="bottom clearfix">

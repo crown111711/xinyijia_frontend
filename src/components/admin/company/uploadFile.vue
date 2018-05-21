@@ -18,7 +18,7 @@
 
         <el-table-column prop="fileType" label="文件类型" min-width="10%">
         </el-table-column>
-        <el-table-column prop="fileSize" label="文件大小" min-width="30%">
+        <el-table-column prop="fileSize" label="文件大小" min-width="10%">
 
         </el-table-column>
         <el-table-column prop="fileDesc" label="文件描述" min-width="10%">

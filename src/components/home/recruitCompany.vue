@@ -60,7 +60,7 @@
 </script>
 <style lang="less" scoped>
   .container {
-    max-width: 1280px;
+    max-width: 100%;
     .sub {
       color: #8f8f8c;
       font-size: 12px;

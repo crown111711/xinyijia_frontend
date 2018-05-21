@@ -62,6 +62,8 @@
   // import {UploadFile} from '../../../api/api'
   // import {GetProducts, NewProd} from '../../../api/adminApi'
   import adminApi from '../../../api/adminApi'
+    import config from '../../../config'
+
 
   export default {
     data() {
@@ -146,7 +148,7 @@
     computed: {
       uploadProductImage() {
         let accessToken = sessionStorage.getItem('accessToken')
-        return 'http://localhost:8090/xyj/api/attachment/uploadFile?type=product' + "&accessToken=" + accessToken
+        return config.API_ROOT + 'attachment/uploadFile?type=product' + "&accessToken=" + accessToken
       }
 
     },

@@ -3,6 +3,8 @@
 import api from '../api/index'
 import store from '../vuex/store'
 import router from '../router'
+import Axios from 'axios'
+import API from '../api/resources'
 
 // 显示提示框
 export const showMsg = (that, close, msg, type) => {
@@ -42,19 +44,60 @@ export const doLogin = (that, data) => {
 
 //加入购物车
 export const addBuyCar = (that, params) => {
-  return api.addBuyCar(params).then(res => {
-    if (res.data.code === 0) {
-      showMsg(that, true, "加入购物车成功", 'success')
-      router.push({
-        path: '/buyCar'
-      })
-    } else(
-      showMsg(that, true, "系统繁忙", 'error')
-    )
 
-  }).catch(err =>{
-    console.log(err)
-  })
+
+  let isLogin = false;
+
+  Axios.get(API.isLogin + "?accessToken=" + sessionStorage.getItem('accessToken')
+
+    )
+    .then(res => {
+      if (res.data === true) {
+        isLogin = true;
+        return api.addBuyCar(params).then(res => {
+          if (res.data.code === 0) {
+            showMsg(that, true, "加入购物车成功", 'success')
+            router.push({
+              path: '/buyCar'
+            })
+          } else(
+            showMsg(that, true, "系统繁忙", 'error')
+          )
+
+        }).catch(err => {
+          console.log(err)
+        })
+      } else {
+        showMsg(that, true, "您尚未登陆，请先登录", 'error')
+        router.push({
+          path: '/login'
+        })
+      }
+    })
+    .catch(err => {
+      console.log(err)
+    })
+
+  // if (isLogin) {
+  //   return api.addBuyCar(params).then(res => {
+  //     if (res.data.code === 0) {
+  //       showMsg(that, true, "加入购物车成功", 'success')
+  //       router.push({
+  //         path: '/buyCar'
+  //       })
+  //     } else(
+  //       showMsg(that, true, "系统繁忙", 'error')
+  //     )
+
+  //   }).catch(err => {
+  //     console.log(err)
+  //   })
+  // } else {
+  //   showMsg(that, true, "您尚未登陆，请先登录", 'error')
+  //    router.push({
+  //         path: '/login'
+  //       })
+  // }
 
 }
 

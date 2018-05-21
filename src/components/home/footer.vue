@@ -4,8 +4,9 @@
       <img class="logo" :src="logoUrl" alt="">
     </el-col>
     <el-col :span="16">
-      <p class="copy">Copyright © 2018-2028.新亿嘉网络科技有限公司.All Rights Reserved.</p>
-      <p class="beian">ICP备案号：</p>
+      <p> 免费客户服务热线： 800-807-0115
+      <p class="copy">Copyright © 2005.重庆南华中天.All Rights Reserved.</p>
+      <p class="beian">渝ICP备16000·385</p>
     </el-col>
   </el-row>
 
@@ -15,7 +16,7 @@
     data() {
       return {
         logoUrl: ''
-
+        
       }
     },
     computed: {

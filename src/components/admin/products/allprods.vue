@@ -185,7 +185,7 @@
       },
       uploadProductImage() {
         let accessToken = sessionStorage.getItem('accessToken')
-        return config.API_ROOT + 'attachment/uploadFile?type=user' + "&accessToken=" + accessToken
+        return config.API_ROOT + 'attachment/uploadFile?type=product' + "&accessToken=" + accessToken
       }
 
     },
@@ -347,6 +347,7 @@
 
         this.imageUrl = res
         var index = res.lastIndexOf('/')
+        this.editprod.imageUrl = res;
         this.editprod.imageName = res.substring(index + 1);
         //URL.createObjectURL(file.raw)
       },

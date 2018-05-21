@@ -27,7 +27,7 @@
           <p class="intro">{{item.searchIndex}}</p>
           <p class="sellnum">历史销量:<span>{{item.sellNum}}</span></p>
           <p class="price">全国包邮价:<span class="textOld">{{item.price}}</span>
-          <el-button type="text" class="button"> <Icon type="ios-cart"></Icon>加入购物车</el-button>
+          <el-button type="text" class="button" @click="addBuyCar(item)"> <Icon type="ios-cart"></Icon>加入购物车</el-button>
           <!--<span class="textOld" v-if="sender">￥{{item.price * sender.zhekou * 0.1}}</span>-->
           </p>
         </el-col>
@@ -46,6 +46,9 @@
 </template>
 <script>
   import adminApi from '../../../api/adminApi'
+   import {
+    addBuyCar
+  } from '../../../lib/vueHelper'
   export default {
     data() {
       return {
@@ -57,6 +60,16 @@
     methods: {
       handleCurrentChange(val) {
         console.log(`当前页: ${val}`)
+      },
+
+      addBuyCar(item) {
+        let params = {
+          quantity: 1,
+          price: item.price,
+          userId: sessionStorage.getItem('uid'),
+          productId: item.id
+        }
+        addBuyCar(this, params)
       },
       // 获取商品
       getprods() {

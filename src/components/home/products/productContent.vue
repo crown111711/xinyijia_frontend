@@ -19,7 +19,7 @@
             </div>
           </div>
           <div class="action">
-            <el-button type="danger" @click="tosend" :disabled="disabled">加入购物车</el-button>
+            <el-button type="danger" @click="addBuyCar" :disabled="disabled">加入购物车</el-button>
             <el-button type="info" @click="back">返回浏览其它商品</el-button>
           </div>
         </el-col>
@@ -37,6 +37,9 @@
 <script>
   import adminApi from '../../../api/adminApi'
   import store from '../../../vuex/store'
+  import {
+    addBuyCar
+  } from '../../../lib/vueHelper'
   export default {
     data() {
       return {
@@ -82,17 +85,29 @@
         }
         adminApi.getProductsInBusiness(params).then(res => {
           console.log(res)
-          console.log("res.data.data"+res.data.data)
+          console.log("res.data.data" + res.data.data)
           this.prod = res.data.data[0]
           this.product = res.data.data[0]
-          if(this.prod.selling === true){
-              console.log("prod 不为null")
+          if (this.prod.selling === true) {
+            console.log("prod 不为null")
           }
           console.log(this.prod)
         })
       },
       tosend() {
+       
         this.$router.push('/manger/send')
+
+
+      },
+      addBuyCar(){
+        let params = {
+          quantity: 1,
+          price: this.prod.price,
+          userId: sessionStorage.getItem('uid'),
+          productId: this.prod.id
+        }
+        addBuyCar(this, params)
       },
       back() {
         this.$router.go(-1)

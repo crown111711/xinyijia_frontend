@@ -49,6 +49,7 @@
 <script>
   // import {UploadFile} from '../../../api/api'
   import adminApi from '../../../api/adminApi'
+  import config from '../../../config'
    import {
     parseStrToDate
   } from '../../../assets/js/assist.js'
@@ -128,7 +129,7 @@
     computed: {
       uploadProductImage() {
         let accessToken = sessionStorage.getItem('accessToken')
-        return 'http://localhost:8090/xyj/api/attachment/uploadFile?type=news' + "&accessToken=" + accessToken
+        return config.API_ROOT+'attachment/uploadFile?type=news' + "&accessToken=" + accessToken
       }
 
     },

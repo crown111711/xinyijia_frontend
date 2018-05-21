@@ -49,6 +49,9 @@
 <script>
   // import {UploadFile} from '../../../api/api'
   import adminApi from '../../../api/adminApi'
+
+  import config from '../../../config'
+
    import {
     parseStrToDate
   } from '../../../assets/js/assist.js'

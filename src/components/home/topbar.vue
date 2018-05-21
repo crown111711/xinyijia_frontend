@@ -17,7 +17,7 @@
       <div class="info" v-if="isLogin">
         <el-dropdown @command="handleCommand">
           <span class="el-dropdown-link">
-         您好, {{ userName }}<i class="el-icon-arrow-down el-icon--right"></i>
+         您好, {{ userName }}<i class="el-icon-arrow-down"></i>
       </span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item v-if="isAdmin" command="companyManage">公司管理</el-dropdown-item>
@@ -167,7 +167,7 @@
           router.push({
             path: "/allNews"
           })
-        } else if(command === "companyManage"){
+        } else if (command === "companyManage") {
           router.push({
             path: "/companymanager"
           })

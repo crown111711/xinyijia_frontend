@@ -38,6 +38,8 @@
   </style>
 
   <script>
+    import config from '../../../config'
+
     export default {
       data() {
         return {
@@ -67,7 +69,7 @@
       computed: {
             upload() {
              let accessToken = sessionStorage.getItem('accessToken')
-             return 'http://localhost:8090/xyj/api/attachment/uploadMultipartFile?type=user'+ "&accessToken="+accessToken
+             return config.API_ROOT+ 'attachment/uploadMultipartFile?type=user'+ "&accessToken="+accessToken
         }
       }
       // created () {

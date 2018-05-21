@@ -43,6 +43,8 @@
 </template>
 <script>
   import adminApi from '../../../api/adminApi'
+  import config from '../../../config'
+
   export default {
     data() {
       return {
@@ -54,7 +56,7 @@
     computed: {
       uploadProductImage() {
         let accessToken = sessionStorage.getItem('accessToken')
-        return 'http://localhost:8090/xyj/api/attachment/uploadMultipartFile?type=download&category=download' +
+        return config.API_ROOT+'attachment/uploadMultipartFile?type=download&category=download' +
           "&accessToken=" + accessToken
       }
 
@@ -105,7 +107,7 @@
           }
         })
       },
-      EditProd( index, file) {
+      EditProd(index, file) {
         this.editFile = file
         this.dialogFormVisible = true
       },

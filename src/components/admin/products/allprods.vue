@@ -7,7 +7,7 @@
         <i slot="prefix" class="el-input__icon el-icon-search"></i>
       </el-input>
       <el-button class="serch-btn" @click="SerchProd" :disabled="disable" type="primary">搜索</el-button>
-       <!--@keyup.enter="SerchProd()"-->
+      <!--@keyup.enter="SerchProd()"-->
     </div>
     <!-- 所有商品 -->
     <div class="allprod">
@@ -101,6 +101,9 @@
 
 <script>
   import adminApi from '../../../api/adminApi'
+
+  import config from '../../../config'
+
   // import {UploadFile} from '../../../api/api'
   export default {
     // ..
@@ -182,7 +185,7 @@
       },
       uploadProductImage() {
         let accessToken = sessionStorage.getItem('accessToken')
-        return 'http://localhost:8090/xyj/api/attachment/uploadFile?type=user' + "&accessToken=" + accessToken
+        return config.API_ROOT + 'attachment/uploadFile?type=user' + "&accessToken=" + accessToken
       }
 
     },
@@ -205,7 +208,10 @@
         // let serchpar = {
         //   name: this.productName
         // }
-        let serchpar = this.productName
+        let serchpar = {
+          "searchParam": this.productName,
+          "searchBusiness": "全部商品"
+        }
         adminApi.searchProducts(serchpar).then(res => {
           // console.log(res)
           if (res.data.code === 0) {
@@ -402,6 +408,11 @@
       this.getAllBusiness()
       this.getallprods()
     }
+    // ,
+    // created () {
+    //   this.getAllBusiness()
+    //   this.getallprods()
+    // }
     // ,
     // created: function () {
     //   // 主页添加键盘事件,注意,不能直接在焦点事件上添加回车

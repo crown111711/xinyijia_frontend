@@ -16,9 +16,6 @@
   import Topbar from './topbar'
   import NavMenu from './NavMenu'
   export default {
-    components: {
-      Back
-    },
     data() {
       return {
         news: {},
@@ -33,7 +30,8 @@
     },
     components: {
       Topbar,
-      NavMenu
+      NavMenu,
+      Back
     },
     methods: {
       curnews() {

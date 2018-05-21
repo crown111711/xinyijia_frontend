@@ -93,6 +93,9 @@
   import {
     getUserInfo
   } from '../../lib/vueHelper'
+
+  import config from '../../config'
+
   import {
     updateBasicUserInfo
   } from '../../lib/vueHelper'
@@ -169,7 +172,7 @@
         api.getUserInfo(accessToken).then(res => {
           if (res.data.code === 0) {
             this.formItem = res.data;
-            this.imageUrl = "http://localhost:8090/xyj/api/attachment/showImage/" + res.data.imageIcon;
+            this.imageUrl = config.API_ROOT+"attachment/showImage/" + res.data.imageIcon;
             //this.formItem.imageIcon = require('./../../assets/image/2.jpg')
           } else if (res.data.code === 1) {
             showMsg(this, true, "系统繁忙", 'error')
@@ -189,7 +192,7 @@
     computed: {
       uploadProductImage() {
         let accessToken = sessionStorage.getItem('accessToken')
-        return 'http://localhost:8090/xyj/api/attachment/uploadFile?type=user' + "&accessToken=" + accessToken
+        return config.API_ROOT +'attachment/uploadFile?type=user' + "&accessToken=" + accessToken
       }
     },
     created() {

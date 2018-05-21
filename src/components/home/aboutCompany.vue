@@ -12,13 +12,12 @@
 </template>
 <script>
   import adminApi from '../../api/adminApi'
-  import Back from '@/components/back'
+  import back from '../back'
+  //  '@/components/back'
   import Topbar from './topbar'
   import NavMenu from './NavMenu'
   export default {
-    components: {
-      Back
-    },
+
     data() {
       return {
         news: {},
@@ -33,7 +32,8 @@
     },
     components: {
       Topbar,
-      NavMenu
+      NavMenu,
+      back
     },
     methods: {
       curnews() {

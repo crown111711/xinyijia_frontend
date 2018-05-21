@@ -172,7 +172,11 @@
         api.getUserInfo(accessToken).then(res => {
           if (res.data.code === 0) {
             this.formItem = res.data;
+            if(res.data.imageIcon != null){
             this.imageUrl = config.API_ROOT+"attachment/showImage/" + res.data.imageIcon;
+            }else{
+              this.imageUrl = "";
+            }
             //this.formItem.imageIcon = require('./../../assets/image/2.jpg')
           } else if (res.data.code === 1) {
             showMsg(this, true, "系统繁忙", 'error')
@@ -231,5 +235,13 @@
     font-size: 24px;
     line-height: 30px;
   }
+   .prod-uploader-icon {
+          font-size: 45px;
+          color: #8c939d;
+          width: 100px;
+          height: 200px;
+          line-height: 200px;
+          text-align: center;
+        }
 
 </style>

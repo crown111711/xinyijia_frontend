@@ -56,9 +56,9 @@
   import {
     formatDate
   } from '../../assets/js/assist.js'
-    import adminApi from '../../api/adminApi'
+  import adminApi from '../../api/adminApi'
 
-      import {
+  import {
     addBuyCar
   } from '../../lib/vueHelper'
 
@@ -71,34 +71,36 @@
     },
     computed: {
 
-    createTime(params) {
-      return formatDate(new Date(params), 'yyyy-MM-dd HH:mm:ss')
-    }
+      createTime(params) {
+        return formatDate(new Date(params), 'yyyy-MM-dd HH:mm:ss')
+      }
 
     },
 
     methods: {
-        // 获取商品
+      // 获取商品
       getprods() {
         // 获取分类列表
         let params = sessionStorage.getItem('accessToken')
         adminApi.recommendProduct(params).then(res => {
           // console.log(res)
           this.products = res.data.data
-          for(var i = 0 ; i< this.products.length;i++){
-            this.products[i].showTime = formatDate(new Date(this.products[i].createTime), 'yyyy-MM-dd HH:mm:ss')
+          if (res.data.data != null) {
+            for (var i = 0; i < this.products.length; i++) {
+              this.products[i].showTime = formatDate(new Date(this.products[i].createTime), 'yyyy-MM-dd HH:mm:ss')
+            }
           }
         })
       },
 
-      addBuyCar(item){
+      addBuyCar(item) {
         let params = {
           quantity: 1,
           price: item.price,
           userId: sessionStorage.getItem('uid'),
           productId: item.id
         }
-        addBuyCar(this,params)
+        addBuyCar(this, params)
       },
 
       offsetImage: function (index) {

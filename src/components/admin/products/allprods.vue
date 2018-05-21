@@ -64,8 +64,8 @@
           </el-select>
         </el-form-item>
 
-        <el-form-item label="商品类名">
-          <el-input v-model="editprod.type"></el-input>
+        <el-form-item label="商品类名" prop="category">
+          <el-input v-model="editprod.category"></el-input>
         </el-form-item>
 
         <el-form-item label="是否上架">
@@ -154,12 +154,13 @@
               message: '价格必须是数字',
               trigger: 'blur'
             }
-          ],
-          category: [{
-            required: true,
-            message: '商品必须选择一个类别',
-            trigger: 'change'
-          }]
+          ]
+          // ,
+          // category: [{
+          //   required: true,
+          //   message: '商品必须选择一个类别',
+          //   trigger: 'change'
+          // }]
           // ,
           // productDesc: [{
           //   required: true,

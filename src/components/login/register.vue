@@ -44,11 +44,11 @@
     name: 'register',
     data() {
       var validateUser = (rule, value, cb) => {
-        var pattern = /^[\w\u4e00-\u9fa5]{3,10}$/g
+        var pattern = /^[\w\u4e00-\u9fa5]{1,10}$/g
         if (value === '') {
           cb(new Error('请输入用户名'))
         } else if (!pattern.test(value)) {
-          cb(new Error('请输入3-10个字母/汉字/数字/下划线'))
+          cb(new Error('请输入1-10个字母/汉字/数字/下划线'))
         } else {
           cb()
         }

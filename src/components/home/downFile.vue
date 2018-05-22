@@ -7,7 +7,7 @@
         <span>文件下载</span>
       </div>
       <div v-for="(item,index) in files" :key="item.fileName" class="text item">
-        <a :href="item.fileUrl"> {{index}}. &nbsp;  {{item.oldName}} [ {{item.fileDesc}}] </a>
+        <a :href="item.fileUrl"> {{index+1}}. &nbsp;  {{item.oldName}} [ {{item.fileDesc}}] </a>
       </div>
     </el-card>
   </div>
